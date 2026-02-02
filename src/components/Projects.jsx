@@ -2,38 +2,32 @@ const projects = [
   {
     title: "Vanilla JavaScript Interactive App (Nov 2025)",
     problem:
-      "Interactive application built with pure JavaScript and DOM APIs, focused on element manipulation and UX.",
+      "Interactive app built with pure JavaScript and DOM APIs, focused on UX and element manipulation.",
     tech: ["JavaScript", "DOM", "HTML", "CSS"],
     role: "Frontend: UI, DOM logic, and UX polish.",
-    demo: "https://your-deployment-url.com",
-    github: "https://github.com/Jimix91/your-repo",
+    demo: "https://jimix91.github.io/Asteroid-Invader.game/",
+    github: "https://github.com/Jimix91/Asteroid-Invader.game",
   },
   {
     title: "React SPA – CRUD Application (Dec 2025)",
     problem:
-      "Single Page Application with external API + mock backend and full CRUD operations.",
+      "SPA with external API + mock backend implementing full CRUD workflows.",
     tech: ["React", "Hooks", "Context", "REST APIs"],
     role: "Frontend: architecture, CRUD flows, and integration.",
-    demo: "https://your-deployment-url.com",
-    github: "https://github.com/Jimix91/your-repo",
+    demo: "https://cityverse-travel-app.vercel.app/",
+    github: "https://github.com/JC-Studio-DualCode/travel-project-app",
   },
   {
     title: "Full Stack MERN Application (Dec 2025)",
     problem:
-      "Fullstack app integrating front and back end with auth, CRUD, and deployment.",
+      "Fullstack app integrating front/back with auth, CRUD, and deployment.",
     tech: ["MongoDB", "Express", "React", "Node.js", "JWT"],
     role: "Full Stack: models, API, auth, and UI.",
-    demo: "https://your-deployment-url.com",
-    github: "https://github.com/Jimix91/your-repo",
-  },
-  {
-    title: "Final Bootcamp Project – Fullstack Application",
-    problem:
-      "End-to-end MERN project with role management, security basics, and deployment.",
-    tech: ["MERN", "Mongoose", "Express", "React Router"],
-    role: "Full Stack: front/back integration and deployment.",
-    demo: "https://your-deployment-url.com",
-    github: "https://github.com/Jimix91/your-repo",
+    demo: "https://arkadia-gameportal.vercel.app/",
+    githubFrontend:
+      "https://github.com/Jimix91/arkadia-gamePortal-project-frontend",
+    githubBackend:
+      "https://github.com/Jimix91/arkadia-gamePortal-project-backend",
   },
 ];
 
@@ -43,31 +37,65 @@ function Projects() {
       <div className="container">
         <h2 className="section-title">Featured projects</h2>
         <p className="section-subtitle">
-          Selected work from 2025, focused on CRUD, APIs, and full-stack
-          delivery.
+          Selected work focused on CRUD, APIs, and full-stack delivery.
         </p>
         <div className="grid projects-grid">
           {projects.map((project) => (
-            <article className="card" key={project.title}>
-              <div className="card-header">
-                <h3>{project.title}</h3>
-                <div className="card-links">
-                  <a href={project.demo} target="_blank" rel="noreferrer">
-                    Demo
-                  </a>
-                  <a href={project.github} target="_blank" rel="noreferrer">
-                    GitHub
-                  </a>
+            <article className="card project-card" key={project.title}>
+              <div className="project-header">
+                <div>
+                  <p className="project-label">Featured project</p>
+                  <h3>{project.title}</h3>
                 </div>
+                <span className="project-role">{project.role}</span>
               </div>
               <p className="muted">{project.problem}</p>
-              <p className="role">Role: {project.role}</p>
               <div className="tags">
                 {project.tech.map((item) => (
                   <span className="tag" key={item}>
                     {item}
                   </span>
                 ))}
+              </div>
+              <div className="project-links">
+                <a
+                  className="btn tiny ghost"
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Live demo
+                </a>
+                {project.github && (
+                  <a
+                    className="btn tiny primary"
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View code
+                  </a>
+                )}
+                {project.githubFrontend && (
+                  <a
+                    className="btn tiny primary"
+                    href={project.githubFrontend}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Frontend code
+                  </a>
+                )}
+                {project.githubBackend && (
+                  <a
+                    className="btn tiny primary"
+                    href={project.githubBackend}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Backend code
+                  </a>
+                )}
               </div>
             </article>
           ))}

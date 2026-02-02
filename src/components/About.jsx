@@ -25,9 +25,10 @@ function About() {
             Open to junior Full Stack or Frontend roles, remote or hybrid.
           </p>
           <ul>
-            <li>Madrid, ES</li>
+            <li>Ciutadella de Menorca, Balearic Islands, Spain</li>
             <li>English B2 · Spanish native</li>
-            <li>Freelance or full-time</li>
+            <li>Freelance or full-time,</li>
+            <li>Searching mainly remote jobs</li>
           </ul>
         </div>
       </div>

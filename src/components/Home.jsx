@@ -1,10 +1,22 @@
 function Home() {
   return (
     <header className="hero">
+      <nav className="nav">
+        <div className="container nav-content">
+          <span className="logo">JJ</span>
+          <div className="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#stack">Skills</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
       <div className="container hero-content">
         <div>
           <p className="eyebrow">Hi, I'm</p>
-          <h1 className="name">Joan Jiménez</h1>
+          <h1 className="name">Joan Jiménez Camps</h1>
           <h2 className="role-title">
             Full Stack Web Developer – Internal Tools & Business Applications
           </h2>
@@ -30,6 +42,20 @@ function Home() {
             <li>Frontend + full-stack delivery</li>
             <li>Quality, reliability, and UX</li>
           </ul>
+          <div className="hero-stats">
+            <div>
+              <span className="stat">2025</span>
+              <span className="stat-label">Bootcamp</span>
+            </div>
+            <div>
+              <span className="stat">MERN</span>
+              <span className="stat-label">Stack</span>
+            </div>
+            <div>
+              <span className="stat">3</span>
+              <span className="stat-label">Projects</span>
+            </div>
+          </div>
         </div>
       </div>
     </header>
