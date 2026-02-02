@@ -1,3 +1,5 @@
+import profileImage from "../assets/Imagen Perfil 2.png";
+
 function Home() {
   return (
     <header className="hero">
@@ -16,7 +18,14 @@ function Home() {
       <div className="container hero-content">
         <div>
           <p className="eyebrow">Hi, I'm</p>
-          <h1 className="name">Joan Jiménez Camps</h1>
+          <div className="name-row">
+            <img
+              className="profile-image"
+              src={profileImage}
+              alt="Joan Jimenez Camps"
+            />
+            <h1 className="name">Joan Jiménez Camps</h1>
+          </div>
           <h2 className="role-title">
             Full Stack Web Developer – Internal Tools & Business Applications
           </h2>
