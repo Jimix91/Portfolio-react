@@ -1,35 +1,39 @@
 const projects = [
   {
-    title: "TaskFlow",
-    problem: "Keeps remote teams aligned and reduces task chaos.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    role: "Full Stack: UI, REST API, and deployment.",
-    demo: "https://taskflow-demo.example.com",
-    github: "https://github.com/username/taskflow",
+    title: "Vanilla JavaScript Interactive App (Nov 2025)",
+    problem:
+      "Interactive application built with pure JavaScript and DOM APIs, focused on element manipulation and UX.",
+    tech: ["JavaScript", "DOM", "HTML", "CSS"],
+    role: "Frontend: UI, DOM logic, and UX polish.",
+    demo: "https://your-deployment-url.com",
+    github: "https://github.com/Jimix91/your-repo",
   },
   {
-    title: "GreenCart",
-    problem: "Cuts food waste by connecting stores and buyers.",
-    tech: ["React", "Firebase", "Stripe"],
-    role: "Frontend: architecture, design, and checkout.",
-    demo: "https://greencart-demo.example.com",
-    github: "https://github.com/username/greencart",
+    title: "React SPA – CRUD Application (Dec 2025)",
+    problem:
+      "Single Page Application with external API + mock backend and full CRUD operations.",
+    tech: ["React", "Hooks", "Context", "REST APIs"],
+    role: "Frontend: architecture, CRUD flows, and integration.",
+    demo: "https://your-deployment-url.com",
+    github: "https://github.com/Jimix91/your-repo",
   },
   {
-    title: "FitLog",
-    problem: "Tracks training with clear metrics and progress.",
-    tech: ["Vue", "Node.js", "PostgreSQL"],
-    role: "Backend: models, auth, and reporting.",
-    demo: "https://fitlog-demo.example.com",
-    github: "https://github.com/username/fitlog",
+    title: "Full Stack MERN Application (Dec 2025)",
+    problem:
+      "Fullstack app integrating front and back end with auth, CRUD, and deployment.",
+    tech: ["MongoDB", "Express", "React", "Node.js", "JWT"],
+    role: "Full Stack: models, API, auth, and UI.",
+    demo: "https://your-deployment-url.com",
+    github: "https://github.com/Jimix91/your-repo",
   },
   {
-    title: "CityPulse",
-    problem: "Turns city data into fast, actionable insights.",
-    tech: ["React", "D3.js", "Python"],
-    role: "Data viz: dashboards and storytelling.",
-    demo: "https://citypulse-demo.example.com",
-    github: "https://github.com/username/citypulse",
+    title: "Final Bootcamp Project – Fullstack Application",
+    problem:
+      "End-to-end MERN project with role management, security basics, and deployment.",
+    tech: ["MERN", "Mongoose", "Express", "React Router"],
+    role: "Full Stack: front/back integration and deployment.",
+    demo: "https://your-deployment-url.com",
+    github: "https://github.com/Jimix91/your-repo",
   },
 ];
 
@@ -39,7 +43,8 @@ function Projects() {
       <div className="container">
         <h2 className="section-title">Featured projects</h2>
         <p className="section-subtitle">
-          3–5 solid projects, well documented and impact-focused.
+          Selected work from 2025, focused on CRUD, APIs, and full-stack
+          delivery.
         </p>
         <div className="grid projects-grid">
           {projects.map((project) => (

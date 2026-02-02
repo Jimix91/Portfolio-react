@@ -6,24 +6,27 @@ function Contact() {
           <h2 className="section-title">Easy contact</h2>
           <p className="muted">Want to talk? I reply within 24–48h.</p>
           <div className="contact-links">
-            <a href="mailto:joan@email.com">joan@email.com</a>
+            <a href="mailto:joanjimenezcamps@gmail.com">
+              joanjimenezcamps@gmail.com
+            </a>
+            <span>+34 680 788 467</span>
             <a
-              href="https://www.linkedin.com/in/username"
+              href="https://www.linkedin.com/in/your-linkedin"
               target="_blank"
               rel="noreferrer"
             >
               LinkedIn
             </a>
-            <a
-              href="https://github.com/username"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://github.com/Jimix91" target="_blank" rel="noreferrer">
               GitHub
             </a>
           </div>
         </div>
-        <form className="card contact-form" action="mailto:joan@email.com" method="post">
+        <form
+          className="card contact-form"
+          action="mailto:joanjimenezcamps@gmail.com"
+          method="post"
+        >
           <label>
             Name
             <input type="text" name="name" placeholder="Your name" />

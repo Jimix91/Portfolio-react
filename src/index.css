@@ -2,12 +2,19 @@
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   font-weight: 400;
-  color: #0f172a;
-  background-color: #f8fafc;
+  color: #0b1220;
+  background-color: #f4f6fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --primary: #0b1f3a;
+  --accent: #1f6feb;
+  --muted: #4b5563;
+  --card: #ffffff;
+  --border: #d7dde8;
+  --bg: #f4f6fb;
+  --bg-alt: #eef2f7;
 }
 
 * {
@@ -17,7 +24,7 @@
 body {
   margin: 0;
   min-width: 320px;
-  background-color: #f8fafc;
+  background-color: var(--bg);
 }
 
 a {
@@ -34,6 +41,16 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: radial-gradient(
+      circle at top right,
+      rgba(31, 111, 235, 0.08),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(11, 31, 58, 0.08),
+      transparent 50%
+    );
 }
 
 .container {
@@ -42,8 +59,8 @@ img {
 }
 
 .hero {
-  background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 55%, #f1f5f9 100%);
-  padding: 80px 0 56px;
+  background: linear-gradient(135deg, #e9f0ff 0%, #ffffff 60%, #edf1f7 100%);
+  padding: 64px 0 40px;
 }
 
 .hero-content {
@@ -57,24 +74,36 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 0.75rem;
-  color: #64748b;
+  color: #6b7280;
   margin-bottom: 12px;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-size: clamp(2.6rem, 4.8vw, 4rem);
   line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.name {
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.role-title {
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  font-weight: 600;
+  color: var(--muted);
   margin: 0 0 16px;
 }
 
 .lead {
   font-size: 1.1rem;
   max-width: 540px;
-  color: #334155;
+  color: var(--muted);
 }
 
 .hero-card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 18px;
   padding: 24px 28px;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
@@ -82,7 +111,7 @@ h1 {
 
 .hero-card ul {
   padding-left: 18px;
-  color: #334155;
+  color: var(--muted);
 }
 
 .cta {
@@ -104,15 +133,15 @@ h1 {
 }
 
 .btn.primary {
-  background: #0f172a;
+  background: var(--primary);
   color: #ffffff;
   box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
 }
 
 .btn.ghost {
   background: #ffffff;
-  color: #0f172a;
-  border-color: #cbd5f5;
+  color: var(--primary);
+  border-color: var(--border);
 }
 
 .btn:hover {
@@ -121,11 +150,11 @@ h1 {
 }
 
 .section {
-  padding: 72px 0;
+  padding: 48px 0;
 }
 
 .section.alt {
-  background: #f1f5f9;
+  background: var(--bg-alt);
 }
 
 .section-title {
@@ -134,8 +163,8 @@ h1 {
 }
 
 .section-subtitle {
-  color: #64748b;
-  margin-bottom: 32px;
+  color: #6b7280;
+  margin-bottom: 24px;
 }
 
 .grid {
@@ -156,10 +185,11 @@ h1 {
 }
 
 .card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(215, 221, 232, 0.6);
 }
 
 .card-header {
@@ -174,11 +204,11 @@ h1 {
   display: flex;
   gap: 12px;
   font-weight: 600;
-  color: #2563eb;
+  color: var(--accent);
 }
 
 .muted {
-  color: #475569;
+  color: var(--muted);
 }
 
 .role {
@@ -193,16 +223,16 @@ h1 {
 }
 
 .tag {
-  background: #e2e8f0;
+  background: #e6ecf5;
   border-radius: 999px;
   padding: 4px 10px;
   font-size: 0.8rem;
-  color: #334155;
+  color: #2f3b4f;
 }
 
 .stack-list {
   padding-left: 18px;
-  color: #334155;
+  color: var(--muted);
 }
 
 .two-columns {
@@ -213,7 +243,7 @@ h1 {
 }
 
 .highlight {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
 }
 
 .contact {
@@ -228,7 +258,7 @@ h1 {
   flex-direction: column;
   gap: 12px;
   font-weight: 600;
-  color: #1d4ed8;
+  color: var(--accent);
 }
 
 .contact-form {
@@ -240,20 +270,20 @@ h1 {
   display: grid;
   gap: 6px;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--primary);
 }
 
 .contact-form input,
 .contact-form textarea {
   border-radius: 10px;
-  border: 1px solid #cbd5f5;
+  border: 1px solid var(--border);
   padding: 10px 12px;
   font-size: 1rem;
   font-family: inherit;
 }
 
 .footer {
-  padding: 32px 0 40px;
-  color: #64748b;
+  padding: 24px 0 32px;
+  color: #6b7280;
   text-align: center;
 }

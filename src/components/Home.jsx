@@ -3,11 +3,16 @@ function Home() {
     <header className="hero">
       <div className="container hero-content">
         <div>
-          <p className="eyebrow">Hi, I'm Joan Jiménez</p>
-          <h1>Full Stack Web Developer</h1>
+          <p className="eyebrow">Hi, I'm</p>
+          <h1 className="name">Joan Jiménez</h1>
+          <h2 className="role-title">
+            Full Stack Web Developer – Internal Tools & Business Applications
+          </h2>
           <p className="lead">
-            I build clear, fast web products. I focus on real problems with
-            simple experiences and maintainable code.
+            Junior Full-Stack developer with hands-on experience in frontend and
+            full-stack projects (JavaScript, React, MERN). I bring an IT
+            background in enterprise systems and technical support, with a
+            strong focus on problem-solving and code quality.
           </p>
           <div className="cta">
             <a className="btn primary" href="#projects">
@@ -19,11 +24,11 @@ function Home() {
           </div>
         </div>
         <div className="hero-card">
-          <h3>What I do</h3>
+          <h3>Focus</h3>
           <ul>
-            <li>Frontend with UX focus</li>
-            <li>Clean, scalable APIs</li>
-            <li>Fast and clear delivery</li>
+            <li>Internal tools and business apps</li>
+            <li>Frontend + full-stack delivery</li>
+            <li>Quality, reliability, and UX</li>
           </ul>
         </div>
       </div>

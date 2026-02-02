@@ -1,15 +1,39 @@
 const stack = [
   {
     title: "Frontend",
-    items: ["React", "Vite", "Tailwind", "CSS Modules"],
+    items: [
+      "HTML",
+      "CSS",
+      "Responsive Design",
+      "JavaScript (ES6+)",
+      "DOM",
+      "React (Hooks, Router, Context)",
+      "API Consumption",
+      "Testing (Jest, RTL)",
+    ],
   },
   {
     title: "Backend",
-    items: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
+    items: [
+      "Node.js",
+      "Express (Routing, Middleware)",
+      "REST APIs",
+      "CRUD",
+      "MongoDB / Mongoose",
+      "Auth (JWT)",
+      "Error Handling",
+      "Deployment (Fly.io, Netlify)",
+    ],
   },
   {
     title: "Tools",
-    items: ["Git", "GitHub", "Figma", "Docker"],
+    items: [
+      "Git & GitHub",
+      "VS Code",
+      "Postman / Insomnia",
+      "StackBlitz",
+      "Chrome DevTools",
+    ],
   },
 ];
 
