@@ -245,9 +245,9 @@ h1 {
 }
 
 .btn.ghost {
-  background: #ffffff;
-  color: var(--primary);
-  border-color: var(--border);
+  background: rgba(31, 111, 235, 0.12);
+  color: #0b1f3a;
+  border-color: rgba(31, 111, 235, 0.4);
 }
 
 .btn:hover {
@@ -360,6 +360,13 @@ h1 {
   gap: 12px;
   margin-top: 18px;
   flex-wrap: wrap;
+}
+
+.project-links .btn.ghost {
+  background: linear-gradient(135deg, #7fb0ff 0%, #4f83ff 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 8px 18px rgba(31, 111, 235, 0.25);
 }
 
 .quality-grid {
