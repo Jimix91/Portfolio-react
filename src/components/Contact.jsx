@@ -31,7 +31,7 @@ function Contact() {
       })
       .then(() => {
         setStatus("success");
-        event.currentTarget.reset();
+        form.reset();
       })
       .catch((error) => {
         console.error("Email error:", error);
