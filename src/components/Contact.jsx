@@ -49,7 +49,7 @@ function Contact() {
             <span>joanjimenezcamps@gmail.com</span>
             <span>+34 680 788 467</span>
             <a
-              href="https://www.linkedin.com/in/your-linkedin"
+              href="https://www.linkedin.com/in/joan-jimenez-camps/"
               target="_blank"
               rel="noreferrer"
             >
