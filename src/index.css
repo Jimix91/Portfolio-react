@@ -1099,7 +1099,6 @@ section[id] {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
-  grid-auto-flow: dense;
 }
 
 .showcase-card {
@@ -1124,6 +1123,14 @@ section[id] {
 
 .showcase-architecture {
   background: linear-gradient(180deg, #f2f5ff 0%, #e7edff 100%);
+}
+
+.showcase-security {
+  background: linear-gradient(180deg, #fff4f0 0%, #ffe8e0 100%);
+}
+
+.showcase-deployment {
+  background: linear-gradient(180deg, #f0faf8 0%, #e0f5f0 100%);
 }
 
 .showcase-visuals {
@@ -1225,12 +1232,18 @@ section[id] {
 
 .showcase-hero-media {
   grid-column: span 4;
-  padding: 12px;
+  padding: 16px;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .showcase-hero-media img {
   width: 100%;
+  max-height: 200px;
+  object-fit: contain;
   border-radius: 12px;
   border: 1px solid rgba(17, 32, 60, 0.16);
 }
@@ -1250,19 +1263,27 @@ section[id] {
 }
 
 .showcase-features {
-  grid-column: span 8;
+  grid-column: span 12;
 }
 
 .showcase-architecture {
   grid-column: span 4;
 }
 
+.showcase-security {
+  grid-column: span 4;
+}
+
+.showcase-deployment {
+  grid-column: span 4;
+}
+
 .showcase-visuals {
-  grid-column: span 7;
+  grid-column: span 12;
 }
 
 .showcase-lessons {
-  grid-column: span 5;
+  grid-column: span 12;
 }
 
 .showcase-section-title {
@@ -1304,7 +1325,7 @@ section[id] {
 .showcase-feature-grid {
   margin-top: 12px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
 }
 
@@ -1351,13 +1372,12 @@ section[id] {
 
 .showcase-gallery {
   margin-top: 12px;
-  column-count: 2;
-  column-gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
 }
 
 .showcase-gallery-item {
-  margin: 0 0 12px;
-  break-inside: avoid;
   border: 1px solid rgba(157, 185, 227, 0.9);
   background: linear-gradient(180deg, #f0f7ff 0%, #e5f0ff 100%);
   border-radius: 16px;
@@ -1450,15 +1470,20 @@ section[id] {
   .showcase-hero,
   .showcase-overview,
   .showcase-features,
-  .showcase-visuals {
+  .showcase-visuals,
+  .showcase-lessons {
     grid-column: span 6;
   }
 
   .showcase-hero-media,
-  .showcase-tech,
-  .showcase-architecture,
-  .showcase-lessons {
+  .showcase-tech {
     grid-column: span 3;
+  }
+
+  .showcase-architecture,
+  .showcase-security,
+  .showcase-deployment {
+    grid-column: span 2;
   }
 }
 
@@ -1473,6 +1498,8 @@ section[id] {
   .showcase-tech,
   .showcase-features,
   .showcase-architecture,
+  .showcase-security,
+  .showcase-deployment,
   .showcase-visuals,
   .showcase-lessons {
     grid-column: auto;
@@ -1487,6 +1514,6 @@ section[id] {
   }
 
   .showcase-gallery {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }

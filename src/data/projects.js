@@ -1,6 +1,13 @@
-import dashboardImage from "../assets/dashboard.png";
 import ticketflowLogoImage from "../assets/ticketflow_logo_subtitle_transparent.png";
-import ticketResolutionImage from "../assets/ticketresolution.png";
+import ticketflowDashboardImage from "../assets/ticketflowdashboard.png";
+import ticketflowResolutionImage from "../assets/ticketflowresolution.png";
+import arkadiaLogoImage from "../assets/logoArkadia1.png";
+import arkadiaDashboardImage from "../assets/arkadiadashboard.png";
+import arkadiaGameListImage from "../assets/arkadiagamelist.png";
+import cityverseDashboardImage from "../assets/cityversedashboard.png";
+import cityverseCitiesImage from "../assets/cityversecities.png";
+import asteroidDashboardImage from "../assets/asteroidinvaderdashboard.png";
+import asteroidGameImage from "../assets/asteroidinvadergame.png";
 
 export const projects = [
   {
@@ -185,13 +192,13 @@ export const projects = [
         caption: "TicketFlow branding and product identity used across the platform.",
       },
       {
-        src: dashboardImage,
+        src: ticketflowDashboardImage,
         alt: "TicketFlow dashboard with Kanban ticket workflow",
         caption:
           "Dashboard view with KPI cards, filters, and drag-and-drop ticket workflow by status.",
       },
       {
-        src: ticketResolutionImage,
+        src: ticketflowResolutionImage,
         alt: "TicketFlow ticket resolution screen",
         caption:
           "Ticket resolution page with status control, comment timeline, and structured follow-up actions.",
@@ -204,43 +211,92 @@ export const projects = [
   {
     slug: "arkadia",
     title: "Arkadia",
-    subtitle: "Full Stack MERN Application (Dec 2025)",
+    subtitle: "Full Stack Game Portal (Dec 2025)",
     problem:
-      "Fullstack app integrating front/back with auth, CRUD, and deployment.",
-    tech: ["MongoDB", "Express", "React", "Node.js", "JWT"],
-    role: "Full Stack: models, API, auth, and UI.",
-    overview:
-      "Arkadia is a web platform to catalog and explore video game content with user accounts, authentication, and CRUD operations over core resources.",
-    needCovered:
-      "It covers the need for a central place to manage game data and profiles without relying on multiple disconnected tools.",
-    techDetails: [
-      "React to build dynamic views with shared state and smooth navigation.",
-      "Node.js + Express for a REST API with authentication and authorization middleware.",
-      "MongoDB for flexible storage of entities and document-oriented relationships.",
-      "JWT for stateless sessions and private route protection.",
-      "Deployment on Vercel for the frontend with a separate, environment-configurable backend.",
+      "Fullstack game portal focused on discovery, reviews, and fast title comparison in a single unified experience.",
+    tech: ["React", "Vite", "React Router", "Node.js", "Express", "MongoDB", "JWT", "bcrypt"],
+    role: "Full Stack: game/review data modeling, auth, protected routes, and UI delivery.",
+    projectDescription:
+      "Arkadia is a fullstack game portal where players can explore a curated catalog, publish reviews, and share opinions in a clean, fast interface designed for discovery.",
+    problemItSolves:
+      "It brings fragmented game opinions into one place, helping players compare titles quickly, find what fits their taste, and avoid decision fatigue.",
+    techStack: {
+      frontend: "React + Vite + React Router.",
+      backend: "Node.js + Express.",
+      database: "MongoDB.",
+      authSecurity: "JWT + bcrypt.",
+      tooling: "REST API architecture with environment-based deployment config.",
+    },
+    features: [
+      {
+        title: "Authentication and route protection",
+        items: [
+          "User signup/login with protected routes.",
+          "Session-aware navigation and private access for authenticated actions.",
+        ],
+      },
+      {
+        title: "Catalog and reviews",
+        items: [
+          "Create games and publish reviews.",
+          "Centralized opinions and ratings to support quick comparison.",
+        ],
+      },
+      {
+        title: "Discovery and sorting",
+        items: [
+          "Filters by genre, platform, and rating.",
+          "Lists sorted by popularity or score.",
+        ],
+      },
+      {
+        title: "Administration",
+        items: [
+          "Admin panel for content management.",
+          "Role-aware control paths for sensitive update/delete operations.",
+        ],
+      },
     ],
-    appWalkthrough: [
-      "Landing page and content explorer with filters by type and categories.",
-      "Sign up and sign in flows with access control for protected features.",
-      "Create and edit operations with validated forms.",
-      "User dashboard to organize personal data and keep profiles updated.",
+    architecture: [
+      {
+        title: "SPA + REST separation",
+        items: [
+          "A React SPA consumes a REST API for games, reviews, and user flows.",
+          "Server code is organized in routes, models, and middleware layers.",
+          "Role-based authorization logic controls access to admin actions.",
+        ],
+      },
+    ],
+    securityCurrent: [
+      "Passwords are hashed with bcrypt before persistence.",
+      "Sessions are managed with JWT tokens.",
+      "Sensitive endpoints are protected with authorization checks.",
+    ],
+    deployment: [
+      "Frontend and backend are deployed separately.",
+      "Environment variables are used for API URLs and secret keys.",
+      "Deployment configuration keeps runtime credentials out of source code.",
+    ],
+    lessonsLearned: [
+      "Building a complete product end to end improved data modeling and access-control decisions.",
+      "State management and iterative UI/UX refinements were essential for usability.",
+      "The original codebase was built in Spanish, which reinforced the importance of naming consistency and documentation.",
     ],
     screenshots: [
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://arkadia-gameportal.vercel.app/",
-        alt: "Arkadia - main page",
-        caption: "Entry screen with content exploration and primary navigation.",
+        src: arkadiaLogoImage,
+        alt: "Arkadia brand and product identity",
+        caption: "Arkadia branding and visual identity used across the platform.",
       },
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://github.com/Jimix91/arkadia-gamePortal-project-frontend",
-        alt: "Arkadia - frontend repository",
-        caption: "Component organization and frontend presentation logic.",
+        src: arkadiaDashboardImage,
+        alt: "Arkadia dashboard with catalog and filters",
+        caption: "Main discovery view with game catalog, filters, and quick navigation.",
       },
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://github.com/Jimix91/arkadia-gamePortal-project-backend",
-        alt: "Arkadia - backend repository",
-        caption: "Backend API services, models, and authentication flows.",
+        src: arkadiaGameListImage,
+        alt: "Arkadia game list and review exploration",
+        caption: "Catalog browsing experience for comparing games and reading community opinions.",
       },
     ],
     demo: "https://arkadia-gameportal.vercel.app/",
@@ -276,14 +332,14 @@ export const projects = [
     ],
     screenshots: [
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://cityverse-travel-app.vercel.app/",
-        alt: "Cityverse - home and navigation",
-        caption: "Main view with search and app navigation structure.",
+        src: cityverseDashboardImage,
+        alt: "Cityverse dashboard with search and favorites",
+        caption: "Main dashboard view with city search and saved favorites.",
       },
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://github.com/JC-Studio-DualCode/travel-project-app",
-        alt: "Cityverse - code repository",
-        caption: "Repository showing project architecture and integration modules.",
+        src: cityverseCitiesImage,
+        alt: "Cityverse cities exploration view",
+        caption: "Cities browsing experience with detailed information and CRUD controls.",
       },
     ],
     demo: "https://cityverse-travel-app.vercel.app/",
@@ -316,14 +372,14 @@ export const projects = [
     ],
     screenshots: [
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://jimix91.github.io/Asteroid-Invader.game/",
-        alt: "Asteroid Invader - game screen",
-        caption: "Game interface and main interaction area.",
+        src: asteroidDashboardImage,
+        alt: "Asteroid Invader main game interface",
+        caption: "Game screen with score display, controls, and visual feedback.",
       },
       {
-        src: "https://image.thum.io/get/width/1400/noanimate/https://github.com/Jimix91/Asteroid-Invader.game",
-        alt: "Asteroid Invader - repository",
-        caption: "Code structure with game logic and DOM handling.",
+        src: asteroidGameImage,
+        alt: "Asteroid Invader gameplay in action",
+        caption: "Active gameplay showing physics, collisions, and user interaction.",
       },
     ],
     demo: "https://jimix91.github.io/Asteroid-Invader.game/",

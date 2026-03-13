@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/projects";
 
 function SectionCard({ title, subtitle, className = "", children }) {
+  if (!children) return null;
   const classes = `showcase-card ${className}`.trim();
 
   return (
@@ -236,6 +237,9 @@ function ProjectDetail() {
   const overviewText = project.projectDescription || project.overview;
   const problemText = project.problemItSolves || project.needCovered;
   const lessons = project.lessonsLearned || project.appWalkthrough || [];
+  const securityCurrent = project.securityCurrent || [];
+  const securityNext = project.securityNext || [];
+  const deploymentNotes = project.deployment || [];
   const demoCredentials = project.demoCredentials || [];
   const isLogoHeroImage = Boolean(
     heroImage?.alt?.toLowerCase().includes("logo") ||
@@ -348,6 +352,42 @@ function ProjectDetail() {
               techDetails={project.techDetails}
             />
           </SectionCard>
+
+          {(securityCurrent.length > 0 || securityNext.length > 0) && (
+            <SectionCard title="Security" className="showcase-security">
+              {securityCurrent.length > 0 && (
+                <>
+                  <h3>Current Implementation</h3>
+                  <ul className="showcase-list">
+                    {securityCurrent.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {securityNext.length > 0 && (
+                <>
+                  <h3>Next Steps</h3>
+                  <ul className="showcase-list">
+                    {securityNext.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </SectionCard>
+          )}
+
+          {deploymentNotes.length > 0 && (
+            <SectionCard title="Deployment" className="showcase-deployment">
+              <ul className="showcase-list">
+                {deploymentNotes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </SectionCard>
+          )}
 
           <SectionCard title="Visual Preview" className="showcase-visuals">
             <PreviewGallery images={galleryImages} onOpenImage={setActiveImage} />
