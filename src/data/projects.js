@@ -4,6 +4,7 @@ import ticketflowResolutionImage from "../assets/ticketflowresolution.png";
 import arkadiaLogoImage from "../assets/logoArkadia1.png";
 import arkadiaDashboardImage from "../assets/arkadiadashboard.png";
 import arkadiaGameListImage from "../assets/arkadiagamelist.png";
+import cityverseLogoImage from "../assets/cityverselogo.png";
 import cityverseDashboardImage from "../assets/cityversedashboard.png";
 import cityverseCitiesImage from "../assets/cityversecities.png";
 import asteroidDashboardImage from "../assets/asteroidinvaderdashboard.png";
@@ -307,39 +308,104 @@ export const projects = [
   },
   {
     slug: "cityverse",
-    title: "Cityverse",
-    subtitle: "React SPA - CRUD Application (Dec 2025)",
+    title: "CityVerse",
+    subtitle: "React SPA – Travel Journal (Dec 2025)",
     problem:
-      "SPA with external API + mock backend implementing full CRUD workflows.",
-    tech: ["React", "Hooks", "Context", "REST APIs"],
-    role: "Frontend: architecture, CRUD flows, and integration.",
-    overview:
-      "Cityverse is a travel-focused SPA that integrates external sources to discover cities, save personalized content, and manage editable entries.",
-    needCovered:
-      "It provides a unified solution to browse information, save favorites, and manage personal travel data from a single interface.",
-    techDetails: [
-      "React with Hooks to encapsulate logic and compose decoupled views.",
-      "Context API to share global state without prop drilling in CRUD flows.",
-      "Integration with external REST APIs and a mock backend to simulate a real environment.",
-      "Error handling and loading-state strategies to improve UX.",
-      "Responsive design for desktop and mobile devices.",
+      "Travel journal app where users browse countries and cities, store memories with images, and leave reviews in a polished single-page experience.",
+    tech: ["React", "Vite", "React Router", "Firebase", "Cloudinary", "Axios"],
+    role: "Frontend: SPA architecture, Firebase integration, CRUD flows, and UI polish.",
+    projectDescription:
+      "CityVerse is a travel journal built as a React SPA. It lets users browse countries and cities, open detailed city pages, keep visual travel memories with images, and leave reviews. The experience focuses on navigation, city discovery, and a polished UI.",
+    problemItSolves:
+      "It solves the problem of keeping travel memories scattered across notes, photos, and maps. Users can organize cities by country, store descriptions and images, track points of interest, and attach ratings and reviews so each destination becomes a structured personal record.",
+    techStack: {
+      frontend: "React + Vite + React Router + Axios + CSS Modules.",
+      backend: "No custom backend — client-heavy architecture using Firebase REST APIs directly.",
+      database: "Firebase Realtime Database (main city data) + Firestore (auth metadata).",
+      authSecurity: "Firebase Authentication with Google sign-in.",
+      tooling: "Cloudinary for image uploads. Firebase Hosting + Vercel for deployment.",
+    },
+    features: [
+      {
+        title: "Browse and discovery",
+        items: [
+          "Browse all cities in a searchable global view.",
+          "Browse countries and drill down into each country's cities.",
+          "Open any city directly in Google Maps.",
+        ],
+      },
+      {
+        title: "City details",
+        items: [
+          "View city details with gallery images, ratings, reviews, and points of interest.",
+          "Each city is a structured personal record with full context.",
+        ],
+      },
+      {
+        title: "CRUD flows",
+        items: [
+          "Add new countries by creating their first city.",
+          "Add and edit cities with image upload support via Cloudinary.",
+          "Delete cities and delete individual reviews.",
+        ],
+      },
+      {
+        title: "Auth and access",
+        items: [
+          "Log in with Google to unlock authoring actions in the UI.",
+          "Auth context provides session state across the entire app.",
+        ],
+      },
     ],
-    appWalkthrough: [
-      "City search with dynamic results connected to an external API.",
-      "Favorites section to create, edit, and delete saved items.",
-      "Detail view for each entry with contextual information and CRUD actions.",
-      "Visual messaging for loading, error, and confirmation states.",
+    architecture: [
+      {
+        title: "Client-heavy SPA",
+        items: [
+          "Route-level pages handle home, countries, city lists, city details, add/edit flows, and not-found.",
+          "Reusable components: navbar, login modal, loader, review form, and auth context.",
+          "Data access is direct from client to Firebase Realtime Database REST endpoints.",
+          "No custom backend layer — all logic lives in the frontend.",
+        ],
+      },
+    ],
+    securityCurrent: [
+      "Google sign-in via Firebase Authentication.",
+      "Firebase config loaded from environment variables, not hardcoded.",
+      "Firebase Storage locked down with deny-all rules.",
+    ],
+    securityNext: [
+      "Auth enforcement is mostly UI-level — no server-side route guards.",
+      "Firestore rules included are the default temporary open rules, already expired as of March 2026.",
+      "Realtime Database rules are not present in the repo — write protection cannot be verified.",
+      "Next step: tighten database rules, protect write operations at the data layer, not just the UI.",
+    ],
+    deployment: [
+      "Static SPA deployment via Vite build output.",
+      "Configured for both Firebase Hosting and Vercel.",
+      "Both platforms use rewrite rules so all routes fall back to index.html for React Router.",
+    ],
+    lessonsLearned: [
+      "How to structure a React SPA cleanly by pages and components.",
+      "How to use Firebase auth for fast login without a custom backend.",
+      "How to model CRUD flows from the frontend with a polished UX.",
+      "Key lesson: UI-level auth is not the same as real authorization — database rules matter.",
+      "Using multiple Firebase services is fine when each one has a clear, distinct role.",
     ],
     screenshots: [
       {
+        src: cityverseLogoImage,
+        alt: "CityVerse brand and product identity",
+        caption: "CityVerse branding and visual identity used across the travel journal.",
+      },
+      {
         src: cityverseDashboardImage,
-        alt: "Cityverse dashboard with search and favorites",
-        caption: "Main dashboard view with city search and saved favorites.",
+        alt: "CityVerse dashboard with global city search",
+        caption: "Main view with searchable city catalog and country navigation.",
       },
       {
         src: cityverseCitiesImage,
-        alt: "Cityverse cities exploration view",
-        caption: "Cities browsing experience with detailed information and CRUD controls.",
+        alt: "CityVerse city detail with gallery and reviews",
+        caption: "City detail page with images, points of interest, ratings, and reviews.",
       },
     ],
     demo: "https://cityverse-travel-app.vercel.app/",
@@ -348,27 +414,69 @@ export const projects = [
   {
     slug: "asteroid-invader",
     title: "Asteroid Invader",
-    subtitle: "Vanilla JavaScript Interactive App (Nov 2025)",
+    subtitle: "Browser Arcade Shooter (Nov 2025)",
     problem:
-      "Interactive app built with pure JavaScript and DOM APIs, focused on UX and element manipulation.",
-    tech: ["JavaScript", "DOM", "HTML", "CSS"],
-    role: "Frontend: UI, DOM logic, and UX polish.",
-    overview:
-      "Asteroid Invader is an interactive browser experience built without frameworks to practice frontend architecture, animations, and user event control.",
-    needCovered:
-      "It addresses the need to validate strong JavaScript and DOM fundamentals in a complete project focused on user experience and performance.",
-    techDetails: [
-      "Vanilla JavaScript for game logic, collisions, and state control.",
-      "DOM APIs for rendering and real-time element updates.",
-      "Semantic HTML as the structural base for panels, score, and controls.",
-      "CSS for layout, visual feedback, animations, and visual hierarchy.",
-      "Modular organization to separate responsibilities in the main loop.",
+      "Browser-based arcade shooter with ship selection, meteor defense, and a boss encounter, all in a complete playable loop.",
+    tech: ["HTML", "CSS", "JavaScript", "DOM", "localStorage"],
+    role: "Frontend: game loop logic, entity systems, DOM rendering, and gameplay tuning.",
+    projectDescription:
+      "A browser-based arcade shooter where the player selects a ship, defends a planet from falling meteors, and faces a boss encounter, with HUD elements for score, health, and ammo. The experience flows from index.html (ship select) to game.html (gameplay) and gameover.html.",
+    problemItSolves:
+      "Delivers a self-contained, playable game loop in the browser with clear goals (survive, protect the planet, score points), suitable for showcasing core DOM game logic without a game engine.",
+    techStack: {
+      frontend: "HTML/CSS/JavaScript only; no frameworks or build tooling.",
+      backend: "No backend (fully client-side game runtime).",
+      database: "No database; localStorage used for ship selection state.",
+      authSecurity: "No auth required (single-player browser game).",
+      tooling:
+        "Assets and audio loaded locally from the Assets folder via main.js. Styling/layout centralized in main.css.",
+    },
+    features: [
+      {
+        title: "Core gameplay",
+        items: [
+          "Ship selection persisted via localStorage and applied to the player sprite.",
+          "Real-time movement (WASD), shooting (space), and rockets (Enter) with cooldown and ammo tracking.",
+        ],
+      },
+      {
+        title: "Enemy and collision systems",
+        items: [
+          "Meteor lifecycle with size tiers, hitboxes, split behavior, and collision handling.",
+          "Power-ups including double shot, rapid fire, rocket refill, health, and nuke with timed effects.",
+        ],
+      },
+      {
+        title: "Boss and progression",
+        items: [
+          "Boss phase with dedicated health bar, music switch, and difficulty changes.",
+          "HUD includes score, player hearts, planet health, boss health, and rockets.",
+        ],
+      },
     ],
-    appWalkthrough: [
-      "Start screen with instructions and a clear play action.",
-      "Main game scene with continuous movement and hit detection.",
-      "Scoring system with visual feedback for each player event.",
-      "End screen with result summary and restart option.",
+    architecture: [
+      {
+        title: "Single-script game loop",
+        items: [
+          "Main loop is implemented in main.js with classes for Player, Meteor, Boss, Projectile, and PowerUp.",
+          "Timers (setInterval) handle spawning, movement, collisions, and difficulty scaling.",
+          "DOM-driven rendering: each entity owns a DOM element and updates position through style changes.",
+        ],
+      },
+    ],
+    securityCurrent: [
+      "No backend or user data beyond localStorage for ship selection.",
+      "No authentication, network calls, or server-side state.",
+      "Attack surface is minimal and limited to the browser runtime.",
+    ],
+    deployment: [
+      "Static site deployment compatible with GitHub Pages, Netlify, or any static file server.",
+      "Deploy by serving the project root with index.html as the entry point.",
+    ],
+    lessonsLearned: [
+      "Managing multiple timers and collision checks in a DOM game requires careful performance control and cleanup.",
+      "Separating game entities into classes improves maintainability even with a single-script architecture.",
+      "Audio autoplay restrictions require user-interaction hooks to start background music reliably.",
     ],
     screenshots: [
       {

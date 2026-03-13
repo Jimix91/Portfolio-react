@@ -1,6 +1,7 @@
 import profileImage from "../assets/Imagen Perfil 2.png";
 import { projects } from "../data/projects";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   const projectCount = projects.length;
@@ -56,7 +57,14 @@ function Home() {
                   </a>
                   <ul>
                     {projects.map((project) => (
-                      <li key={project.title}>{project.title}</li>
+                      <li key={project.title}>
+                        <Link
+                          to={`/projects/${project.slug}`}
+                          onClick={() => setIsProjectsMenuOpen(false)}
+                        >
+                          {project.title}
+                        </Link>
+                      </li>
                     ))}
                   </ul>
                 </div>
