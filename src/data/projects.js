@@ -19,6 +19,11 @@ export const projects = [
       "REST API",
     ],
     role: "Full Stack: frontend task flows, API integration, and backend ticket lifecycle CRUD.",
+    demoCredentials: [
+      { role: "Admin", email: "admin@ticketflow.dev", password: "123456" },
+      { role: "Agent", email: "agent@ticketflow.dev", password: "123456" },
+      { role: "Employee", email: "employee@ticketflow.dev", password: "123456" },
+    ],
     projectDescription:
       "TicketFlow is an internal IT helpdesk platform designed for company teams to report, track, and resolve technical issues in a structured way. It has role-based workflows for admins, agents, and employees, and supports the full lifecycle of support tickets from creation to resolution and archiving. The app combines a TypeScript backend API with a React single-page frontend, focused on practical day-to-day support operations.",
     problemItSolves:

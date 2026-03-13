@@ -1,15 +1,226 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { projects } from "../data/projects";
+
+function SectionCard({ title, subtitle, className = "", children }) {
+  const classes = `showcase-card ${className}`.trim();
+
+  return (
+    <section className={classes}>
+      <h2 className="showcase-section-title">{title}</h2>
+      {subtitle && <p className="muted showcase-subtitle">{subtitle}</p>}
+      {children}
+    </section>
+  );
+}
+
+function FeatureCards({ features }) {
+  if (!features?.length) {
+    return null;
+  }
+
+  return (
+    <div className="showcase-feature-grid">
+      {features.map((feature) => (
+        <article key={feature.title} className="showcase-feature-card">
+          <h3>{feature.title}</h3>
+          <ul className="showcase-list">
+            {feature.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function TechStackList({ techStack }) {
+  if (!techStack) {
+    return null;
+  }
+
+  return (
+    <ul className="showcase-stack-list">
+      <li>
+        <strong>Frontend:</strong> {techStack.frontend}
+      </li>
+      <li>
+        <strong>Backend:</strong> {techStack.backend}
+      </li>
+      <li>
+        <strong>Database:</strong> {techStack.database}
+      </li>
+      <li>
+        <strong>Auth/Security:</strong> {techStack.authSecurity}
+      </li>
+      <li>
+        <strong>Tooling:</strong> {techStack.tooling}
+      </li>
+    </ul>
+  );
+}
+
+function ArchitectureList({ architecture, techDetails }) {
+  if (architecture?.length) {
+    return (
+      <div className="showcase-architecture-groups">
+        {architecture.map((group) => (
+          <article className="showcase-architecture-card" key={group.title}>
+            <h3>{group.title}</h3>
+            <ul className="showcase-list">
+              {group.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  if (techDetails?.length) {
+    return (
+      <ul className="showcase-list">
+        {techDetails.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  return null;
+}
+
+function PreviewGallery({ images, onOpenImage }) {
+  if (!images?.length) {
+    return null;
+  }
+
+  return (
+    <div className="showcase-gallery">
+      {images.map((image) => (
+        <figure className="showcase-gallery-item" key={image.alt}>
+          <button
+            type="button"
+            className="showcase-image-button"
+            onClick={() => onOpenImage(image)}
+            aria-label={`Expand image: ${image.alt}`}
+          >
+            <img src={image.src} alt={image.alt} loading="lazy" />
+          </button>
+          <figcaption>{image.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function DemoCredentialsReveal({ credentials }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [copiedKey, setCopiedKey] = useState("");
+
+  if (!credentials?.length) {
+    return null;
+  }
+
+  async function copyToClipboard(value, key) {
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(""), 1400);
+    } catch {
+      setCopiedKey("");
+    }
+  }
+
+  return (
+    <div className="demo-reveal-wrap">
+      <button
+        type="button"
+        className="btn tiny secret-toggle-btn"
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+        aria-controls="demo-credentials-panel"
+      >
+        {isOpen ? "Hide demo access" : "Reveal demo access"}
+      </button>
+
+      {isOpen && (
+        <section
+          id="demo-credentials-panel"
+          className="demo-credentials-popover demo-credentials-enter"
+        >
+          <p className="project-label">Secret access</p>
+          <h3>Demo Credentials</h3>
+          <p className="muted">
+            Use these demo accounts to explore different roles in the app.
+          </p>
+          <div className="demo-credentials-grid">
+            {credentials.map((credential) => {
+              const emailKey = `${credential.role}-email`;
+              const passwordKey = `${credential.role}-password`;
+
+              return (
+                <article key={credential.role} className="demo-credential-card">
+                  <h4>{credential.role}</h4>
+
+                  <div className="demo-row">
+                    <span className="demo-label">Email</span>
+                    <code>{credential.email}</code>
+                    <button
+                      type="button"
+                      className="btn tiny demo-copy-btn"
+                      onClick={() => copyToClipboard(credential.email, emailKey)}
+                    >
+                      {copiedKey === emailKey ? "Copied" : "Copy"}
+                    </button>
+                  </div>
+
+                  <div className="demo-row">
+                    <span className="demo-label">Password</span>
+                    <code>{credential.password}</code>
+                    <button
+                      type="button"
+                      className="btn tiny demo-copy-btn"
+                      onClick={() => copyToClipboard(credential.password, passwordKey)}
+                    >
+                      {copiedKey === passwordKey ? "Copied" : "Copy"}
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
+    </div>
+  );
+}
 
 function ProjectDetail() {
   const { slug } = useParams();
   const project = projects.find((item) => item.slug === slug);
-  const hasDetailedContent = Boolean(project?.projectDescription);
+  const [activeImage, setActiveImage] = useState(null);
+
+  useEffect(() => {
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setActiveImage(null);
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   if (!project) {
     return (
-      <main className="project-detail-page">
-        <div className="container project-detail-shell">
+      <main className="showcase-page">
+        <div className="container showcase-shell">
           <p className="eyebrow">Project not found</p>
           <h1 className="project-detail-title">This project does not exist.</h1>
           <Link className="btn primary" to="/">
@@ -20,19 +231,25 @@ function ProjectDetail() {
     );
   }
 
-  const heroImage = project.screenshots?.[0];
-  const galleryImages = hasDetailedContent
-    ? project.screenshots?.slice(1) || []
-    : project.screenshots || [];
+  const heroImage = project.screenshots?.[0] || null;
+  const galleryImages = project.screenshots?.slice(1) || [];
+  const overviewText = project.projectDescription || project.overview;
+  const problemText = project.problemItSolves || project.needCovered;
+  const lessons = project.lessonsLearned || project.appWalkthrough || [];
+  const demoCredentials = project.demoCredentials || [];
+  const isLogoHeroImage = Boolean(
+    heroImage?.alt?.toLowerCase().includes("logo") ||
+      heroImage?.alt?.toLowerCase().includes("brand")
+  );
 
   return (
-    <main className="project-detail-page">
-      <div className="container project-detail-shell">
-        <div className="project-detail-topbar">
+    <main className="showcase-page">
+      <div className="container showcase-shell">
+        <div className="showcase-topbar">
           <Link className="btn tiny ghost" to="/#projects">
             Back to projects
           </Link>
-          <div className="project-detail-actions">
+          <div className="showcase-actions">
             {project.demo && (
               <a className="btn tiny ghost" href={project.demo} target="_blank" rel="noreferrer">
                 Live demo
@@ -63,267 +280,103 @@ function ProjectDetail() {
                 Backend code
               </a>
             )}
+            <DemoCredentialsReveal credentials={demoCredentials} />
           </div>
         </div>
 
-        <header
-          className={`project-detail-header ${
-            hasDetailedContent ? "project-detail-header-pro" : ""
-          }`}
-        >
-          <div>
+        <section className="showcase-grid">
+          <header className="showcase-card showcase-hero">
             <p className="project-label">Featured project</p>
-            <h1 className="project-detail-title">{project.title}</h1>
+            <h1 className="showcase-title">{project.title}</h1>
             {project.subtitle && <p className="role-title">{project.subtitle}</p>}
-            <p className="lead">{project.problem}</p>
-            <div className="tags">
+            <p className="lead showcase-lead">{project.problem}</p>
+            <div className="tags showcase-tags">
               {project.tech.slice(0, 6).map((item) => (
                 <span className="tag" key={item}>
                   {item}
                 </span>
               ))}
             </div>
-          </div>
+          </header>
+
           {heroImage && (
-            <figure className="project-hero-media">
-              <img src={heroImage.src} alt={heroImage.alt} loading="lazy" />
+            <figure className="showcase-card showcase-hero-media">
+              {isLogoHeroImage ? (
+                <img src={heroImage.src} alt={heroImage.alt} loading="lazy" />
+              ) : (
+                <button
+                  type="button"
+                  className="showcase-image-button"
+                  onClick={() => setActiveImage(heroImage)}
+                  aria-label={`Expand image: ${heroImage.alt}`}
+                >
+                  <img src={heroImage.src} alt={heroImage.alt} loading="lazy" />
+                </button>
+              )}
+              <figcaption>{heroImage.caption}</figcaption>
             </figure>
           )}
-        </header>
-
-        {!hasDetailedContent && (
-          <>
-            <section className="detail-card">
-              <h2 className="section-title">What this project is for</h2>
-              <p className="muted">{project.overview}</p>
-            </section>
-
-            <section className="detail-card">
-              <h2 className="section-title">Need it solves</h2>
-              <p className="muted">{project.needCovered}</p>
-            </section>
-
-            <section className="detail-card">
-              <h2 className="section-title">Technology in detail</h2>
-              <ul className="detail-list">
-                {project.techDetails.map((item) => (
+          <SectionCard
+            title="Project Overview"
+            subtitle={problemText}
+            className="showcase-overview"
+          >
+            <p className="muted">{overviewText}</p>
+            {project.problemItSolvesHighlights?.length > 0 && (
+              <ul className="showcase-list">
+                {project.problemItSolvesHighlights.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <div className="tags">
-                {project.tech.map((item) => (
-                  <span className="tag" key={item}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </section>
+            )}
+          </SectionCard>
 
-            <section className="detail-card">
-              <h2 className="section-title">Detailed app walkthrough</h2>
-              <ul className="detail-list">
-                {project.appWalkthrough.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ul>
-            </section>
-          </>
-        )}
+          <SectionCard title="Tech Stack" className="showcase-tech">
+            <TechStackList techStack={project.techStack} />
+          </SectionCard>
 
-        {!hasDetailedContent && (
-          <section className="detail-card">
-            <h2 className="section-title">App images and explanation</h2>
-            <div className="project-screenshots">
-              {project.screenshots.map((image) => (
-                <figure className="project-shot" key={`${project.slug}-${image.alt}`}>
-                  <img src={image.src} alt={image.alt} loading="lazy" />
-                  <figcaption>{image.caption}</figcaption>
-                </figure>
+          <SectionCard title="Key Features" className="showcase-features">
+            <FeatureCards features={project.features} />
+          </SectionCard>
+
+          <SectionCard
+            title="Architecture / Technical Highlights"
+            className="showcase-architecture"
+          >
+            <ArchitectureList
+              architecture={project.architecture}
+              techDetails={project.techDetails}
+            />
+          </SectionCard>
+
+          <SectionCard title="Visual Preview" className="showcase-visuals">
+            <PreviewGallery images={galleryImages} onOpenImage={setActiveImage} />
+          </SectionCard>
+
+          <SectionCard title="Challenges & Lessons Learned" className="showcase-lessons">
+            <ul className="showcase-list">
+              {lessons.map((item) => (
+                <li key={item}>{item}</li>
               ))}
+            </ul>
+          </SectionCard>
+        </section>
+
+        {activeImage && (
+          <div className="showcase-lightbox" onClick={() => setActiveImage(null)} role="presentation">
+            <div className="showcase-lightbox-inner" onClick={(event) => event.stopPropagation()}>
+              <button
+                type="button"
+                className="showcase-lightbox-close"
+                onClick={() => setActiveImage(null)}
+                aria-label="Close expanded image"
+              >
+                x
+              </button>
+              <img src={activeImage.src} alt={activeImage.alt} />
+              {activeImage.caption && <p>{activeImage.caption}</p>}
             </div>
-          </section>
-        )}
-
-        {project.projectDescription && (
-          <section className="project-pro-grid">
-            <div className="project-main-column">
-              <section className="detail-card">
-                <h2 className="section-title">Project Description</h2>
-                <p className="muted">{project.projectDescription}</p>
-              </section>
-
-              {project.problemItSolves && (
-                <section className="detail-card">
-                  <h2 className="section-title">Problem it Solves</h2>
-                  <p className="muted">{project.problemItSolves}</p>
-                  {project.problemItSolvesHighlights?.length > 0 && (
-                    <ul className="detail-list">
-                      {project.problemItSolvesHighlights.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
-              )}
-
-              {project.techStack && (
-                <section className="detail-card">
-                  <h2 className="section-title">Tech Stack</h2>
-                  <ul className="detail-list stack-list-pro">
-                    <li>
-                      <strong>Frontend:</strong> {project.techStack.frontend}
-                    </li>
-                    <li>
-                      <strong>Backend:</strong> {project.techStack.backend}
-                    </li>
-                    <li>
-                      <strong>Database:</strong> {project.techStack.database}
-                    </li>
-                    <li>
-                      <strong>Auth/Security libraries:</strong> {project.techStack.authSecurity}
-                    </li>
-                    <li>
-                      <strong>Tooling:</strong> {project.techStack.tooling}
-                    </li>
-                  </ul>
-                </section>
-              )}
-
-              {project.features?.length > 0 && (
-                <section className="detail-card">
-                  <h2 className="section-title">Features</h2>
-                  <div className="feature-grid">
-                    {project.features.map((group) => (
-                      <article key={group.title} className="feature-card">
-                        <h3>{group.title}</h3>
-                        <ul className="detail-list">
-                          {group.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </article>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {project.architecture?.length > 0 && (
-                <section className="detail-card">
-                  <h2 className="section-title">Architecture</h2>
-                  <p className="muted">
-                    TicketFlow follows a clean full-stack split with two apps:
-                  </p>
-                  <div className="detail-groups">
-                    {project.architecture.map((group) => (
-                      <div key={group.title} className="detail-group">
-                        <h3>{group.title}</h3>
-                        <ul className="detail-list">
-                          {group.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {(project.securityCurrent?.length > 0 || project.deployment?.length > 0) && (
-                <section className="detail-split">
-                  {project.securityCurrent?.length > 0 && (
-                    <div className="detail-card">
-                      <h2 className="section-title">Security</h2>
-                      <p className="muted">Current security mechanisms include:</p>
-                      <ul className="detail-list">
-                        {project.securityCurrent.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                      {project.securityNext?.length > 0 && (
-                        <>
-                          <h3 className="detail-subtitle">
-                            Security improvements you could add next
-                          </h3>
-                          <ul className="detail-list">
-                            {project.securityNext.map((item) => (
-                              <li key={item}>{item}</li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                    </div>
-                  )}
-
-                  {project.deployment?.length > 0 && (
-                    <div className="detail-card">
-                      <h2 className="section-title">Deployment</h2>
-                      <p className="muted">
-                        The project is ready for common modern deployment paths:
-                      </p>
-                      <ul className="detail-list">
-                        {project.deployment.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </section>
-              )}
-
-              {project.lessonsLearned?.length > 0 && (
-                <section className="detail-card">
-                  <h2 className="section-title">Lessons Learned</h2>
-                  <ul className="detail-list">
-                    {project.lessonsLearned.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
-              )}
-
-              {galleryImages.length > 0 && (
-                <section className="detail-card">
-                  <h2 className="section-title">App images and explanation</h2>
-                  <div className="project-screenshots">
-                    {galleryImages.map((image) => (
-                      <figure className="project-shot" key={`${project.slug}-${image.alt}`}>
-                        <img src={image.src} alt={image.alt} loading="lazy" />
-                        <figcaption>{image.caption}</figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                </section>
-              )}
-            </div>
-
-            <aside className="project-side-column">
-              <section className="detail-card side-card">
-                <h2 className="section-title">Project quick view</h2>
-                <ul className="detail-list">
-                  <li>
-                    <strong>Type:</strong> {project.subtitle}
-                  </li>
-                  <li>
-                    <strong>Role:</strong> {project.role}
-                  </li>
-                  <li>
-                    <strong>Main stack:</strong> {project.tech.slice(0, 4).join(" • ")}
-                  </li>
-                </ul>
-              </section>
-
-              {project.screenshots?.length > 0 && (
-                <section className="detail-card side-card">
-                  <h2 className="section-title">Visual highlights</h2>
-                  <div className="mini-shot-grid">
-                    {project.screenshots.map((image) => (
-                      <img key={`${image.alt}-mini`} src={image.src} alt={image.alt} loading="lazy" />
-                    ))}
-                  </div>
-                </section>
-              )}
-            </aside>
-          </section>
+          </div>
         )}
       </div>
     </main>
