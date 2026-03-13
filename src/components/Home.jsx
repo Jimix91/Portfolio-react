@@ -1,13 +1,67 @@
 import profileImage from "../assets/Imagen Perfil 2.png";
+import { projects } from "../data/projects";
+import { useEffect, useRef, useState } from "react";
 
 function Home() {
+  const projectCount = projects.length;
+  const projectLabel = projectCount === 1 ? "Project" : "Projects";
+  const [isProjectsMenuOpen, setIsProjectsMenuOpen] = useState(false);
+  const projectsMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        projectsMenuRef.current &&
+        !projectsMenuRef.current.contains(event.target)
+      ) {
+        setIsProjectsMenuOpen(false);
+      }
+    }
+
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsProjectsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
     <header className="hero">
       <nav className="nav">
         <div className="container nav-content">
           <span className="logo">JJ</span>
           <div className="nav-links">
-            <a href="#projects">Projects</a>
+            <div className="nav-dropdown" ref={projectsMenuRef}>
+              <button
+                type="button"
+                className="nav-dropdown-trigger"
+                onClick={() => setIsProjectsMenuOpen((prev) => !prev)}
+                aria-expanded={isProjectsMenuOpen}
+                aria-controls="projects-nav-menu"
+              >
+                Projects
+              </button>
+              {isProjectsMenuOpen && (
+                <div id="projects-nav-menu" className="nav-dropdown-menu">
+                  <a href="#projects" onClick={() => setIsProjectsMenuOpen(false)}>
+                    View all projects
+                  </a>
+                  <ul>
+                    {projects.map((project) => (
+                      <li key={project.title}>{project.title}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
             <a href="#stack">Skills</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
@@ -61,8 +115,8 @@ function Home() {
               <span className="stat-label">Stack</span>
             </div>
             <div>
-              <span className="stat">3</span>
-              <span className="stat-label">Projects</span>
+              <span className="stat">{projectCount}</span>
+              <span className="stat-label">{projectLabel}</span>
             </div>
           </div>
         </div>
