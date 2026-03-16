@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { projects } from "../../data/projects";
 
 function Navbar() {
+  const navigate = useNavigate();
   const [isProjectsMenuOpen, setIsProjectsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const projectsMenuRef = useRef(null);
@@ -38,10 +39,17 @@ function Navbar() {
     setIsMobileMenuOpen(false);
   }
 
+  function handleLogoClick(event) {
+    event.preventDefault();
+    closeAll();
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <nav className="nav" ref={navRef}>
       <div className="container nav-content">
-        <Link to="/" className="logo" aria-label="Home">
+        <Link to="/" className="logo" aria-label="Home" onClick={handleLogoClick}>
           JJ
         </Link>
 

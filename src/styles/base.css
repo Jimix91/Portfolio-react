@@ -344,6 +344,7 @@ h1 {
 .section {
   position: relative;
   padding: 64px 0;
+  scroll-margin-top: 84px;
   background: linear-gradient(180deg, #f5f9ff 0%, #d4e4ff 100%);
   border-top: 1px solid rgba(170, 194, 232, 0.9);
   border-bottom: 1px solid rgba(170, 194, 232, 0.9);
